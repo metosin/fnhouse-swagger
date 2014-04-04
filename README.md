@@ -11,7 +11,7 @@ This is an alpha release, like fnhouse itself.
 ## Latest version
 
 ```clojure
-[metosin/fnhouse-swagger "0.1.1"]
+[metosin/fnhouse-swagger "0.1.2"]
 ```
 
 ## Usage

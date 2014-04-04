@@ -29,7 +29,6 @@
 
 (defn collect-resource-meta [api-routes [ns-sym prefix]]
   (letk [[{doc nil}] (meta (the-ns ns-sym))]
-    (println doc ns-sym prefix)
     (update-in api-routes [prefix]
       assoc :description doc)))
 
