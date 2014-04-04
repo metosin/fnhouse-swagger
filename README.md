@@ -1,8 +1,12 @@
 # fnhouse-swagger
 
+[![Build Status](https://travis-ci.org/metosin/fnhouse-swagger.svg?branch=master)](https://travis-ci.org/metosin/fnhouse-swagger)
+
 [Swagger](https://helloreverb.com/developers/swagger) implementation
 for [fnhouse](https://github.com/Prismatic/fnhouse) using the
 [Ring-swagger](https://github.com/metosin/ring-swagger).
+
+This is an alpha release, like fnhouse itself.
 
 ## Latest version
 
