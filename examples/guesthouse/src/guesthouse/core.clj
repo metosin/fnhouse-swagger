@@ -53,3 +53,8 @@
   (-> resources
       wrapped-root-handler
       (jetty/run-jetty options)))
+
+(defn start []
+  (start-api {:guestbook (atom {})
+              :index (atom 0)}
+    {:port 8080 :join? false}))
