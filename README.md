@@ -7,7 +7,7 @@ for [fnhouse](https://github.com/Prismatic/fnhouse) using the
 ## Latest version
 
 ```clojure
-[metosin/fnhouse-swagger "0.1.0-SNAPSHOT"]
+[metosin/fnhouse-swagger "0.1.0"]
 ```
 
 ## Usage
@@ -20,6 +20,12 @@ for [fnhouse](https://github.com/Prismatic/fnhouse) using the
 to use the embedded [swagger-ui](https://github.com/wordnik/swagger-ui),
 add a dependency to latest [ring-swagger-ui](https://github.com/metosin/ring-swagger-ui)
 and add add a ring-route `swagger-ui` to your app.
+
+needed changes are isolated in this [commit](https://github.com/metosin/fnhouse-swagger/commit/09fbbff348d1240f24b82962fbcb5ec4dcbca4d2).
+
+## Examples
+
+Guesthouse with fnhouse-swagger is found [here](https://github.com/metosin/fnhouse-swagger/tree/master/examples/guesthouse).
 
 ## License
 
