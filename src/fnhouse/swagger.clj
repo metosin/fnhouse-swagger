@@ -1,4 +1,5 @@
 (ns fnhouse.swagger
+  "Swagger documentation"
   (:use plumbing.core)
   (:require
     [fnhouse.handlers :as handlers]
@@ -14,21 +15,28 @@
   (for [[type f] {:body :body, :query :query-params, :path :uri-args}]
     {:type type :model (f request)}))
 
-(defn collect-route [ns-sym->prefix swagger annotated-handler]
-  (let [{{:keys [method path description request responses source-map]} :info :as info} annotated-handler
-        handler-ns (:ns source-map)
-        prefix (ns-sym->prefix (symbol handler-ns))]
-    (update-in swagger [prefix]
-      update-in [:routes]
-      conj {:method method
-            :uri path
-            :metadata {:summary description
-                       :return (get responses 200)
-                       :nickname (generate-nickname annotated-handler)
-                       :parameters (convert-parameters request)}})))
+(defn collect-route [ns-sym->prefix api-routes annotated-handler]
+  (letk [[[:info method path description request responses [:source-map ns]]] annotated-handler]
+    (let [prefix (ns-sym->prefix (symbol ns))]
+      (update-in api-routes [prefix]
+        update-in [:routes]
+        conj {:method method
+              :uri path
+              :metadata {:summary description
+                         :return (get responses 200)
+                         :nickname (generate-nickname annotated-handler)
+                         :parameters (convert-parameters request)}}))))
+
+(defn collect-resource-meta [api-routes [ns-sym prefix]]
+  (letk [[{doc nil}] (meta (the-ns ns-sym))]
+    (println doc ns-sym prefix)
+    (update-in api-routes [prefix]
+      assoc :description doc)))
 
 (defn collect-routes [handlers prefix->ns-sym]
-  (reduce (partial collect-route (map-invert prefix->ns-sym)) {} handlers))
+  (let [ns-sym->prefix (map-invert prefix->ns-sym)
+        api-routes (reduce (partial collect-route ns-sym->prefix) {} handlers)]
+    (reduce collect-resource-meta api-routes ns-sym->prefix)))
 
 (defn swagger-ui [handler]
   (resource/wrap-resource handler "swagger-ui"))
