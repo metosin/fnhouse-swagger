@@ -41,3 +41,11 @@ user=>
 ```
 
 and browse to http://localhost:8080/index.html
+
+## Api listing
+
+![](https://raw.githubusercontent.com/metosin/fnhouse-swagger/master/examples/guesthouse/pics/api-listing.png)
+
+## Api usage
+
+![](https://raw.githubusercontent.com/metosin/fnhouse-swagger/master/examples/guesthouse/pics/api-usage.png)
