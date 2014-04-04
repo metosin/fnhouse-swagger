@@ -5,7 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[prismatic/plumbing "0.2.2"]
                  [prismatic/fnhouse "0.1.0"]
-                 [metosin/fnhouse-swagger "0.1.1"]
+                 [metosin/fnhouse-swagger "0.1.2"]
                  [metosin/ring-swagger "0.8.3"]
                  [metosin/ring-swagger-ui "2.0.12-1"]
                  [org.clojure/clojure "1.5.1"]
