@@ -7,7 +7,7 @@ for [fnhouse](https://github.com/Prismatic/fnhouse) using the
 ## Latest version
 
 ```clojure
-[metosin/fnhouse-swagger "0.1.0"]
+[metosin/fnhouse-swagger "0.1.1"]
 ```
 
 ## Usage
