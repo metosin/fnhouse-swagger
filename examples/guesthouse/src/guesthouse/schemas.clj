@@ -2,19 +2,20 @@
   "Schemas and constructors that are used in the guesthouse"
   (:require
    [clojure.string :as str]
+   [ring.swagger.schema :refer [defmodel]]
    [schema.core :as s]))
 
-(s/defschema EntryData
+(defmodel EntryData
   "Schema for guestbook entry"
   {:name String
    :age  Long
    :lang (s/enum :clj :cljs)})
 
-(s/defschema Entry
+(defmodel Entry
   "A guestbook entry with an index"
   (assoc EntryData :index Long))
 
-(s/defschema ClientEntry
+(defmodel ClientEntry
   "Schema for a client representation of an entry"
   (-> Entry
       (dissoc :name)
@@ -33,7 +34,7 @@
               (assoc :first-name first
                      :last-name last)))))))
 
-(s/defschema Ack
+(defmodel Ack
   "Simple acknowledgement for successful requests"
   {:message (s/eq "OK")})
 
@@ -41,7 +42,7 @@
   {:status 200
    :body {:message "OK"}})
 
-(s/defschema Missing
+(defmodel Missing
   {:message String})
 
 (s/defn not-found
