@@ -14,6 +14,8 @@ This is an alpha release, like fnhouse itself.
 [metosin/fnhouse-swagger "0.1.2"]
 ```
 
+check out [release notes](https://github.com/metosin/fnhouse-swagger/releases).
+
 ## Usage
 
 - change the `schema.core/defschema`s to `ring.swagger.schema/defmodel`

@@ -16,7 +16,8 @@
     {:type type :model (f request)}))
 
 (defn collect-route [ns-sym->prefix api-routes annotated-handler]
-  (letk [[[:info method path description request responses [:source-map ns]]] annotated-handler]
+  (letk [[[:info method path description request responses
+           [:source-map ns]]] annotated-handler]
     (let [prefix (ns-sym->prefix (symbol ns))]
       (update-in api-routes [prefix]
         update-in [:routes]
@@ -51,4 +52,5 @@
   {:responses {200 s/Any}}
   [[:request [:uri-args resource :- String] :as request]
    [:resources swagger]]
-  (ring-swagger/api-declaration {} swagger resource (ring-swagger/extract-basepath request)))
+  (ring-swagger/api-declaration {} swagger resource
+    (ring-swagger/basepath request)))
