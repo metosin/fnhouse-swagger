@@ -11,14 +11,13 @@ This is an alpha release, like fnhouse itself.
 ## Latest version
 
 ```clojure
-[metosin/fnhouse-swagger "0.1.2"]
+[metosin/fnhouse-swagger "0.2.0"]
 ```
 
 check out [release notes](https://github.com/metosin/fnhouse-swagger/releases).
 
 ## Usage
 
-- change the `schema.core/defschema`s to `ring.swagger.schema/defmodel`
 - create proto-handlers also from `fnhouse.swagger` namespace
 - call `collect-routes` to get ring-swagger map of handlers
 - assoc the map to key `:swagger` into the plumbing resource map

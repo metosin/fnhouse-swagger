@@ -4,12 +4,13 @@
   (:require
     [fnhouse.handlers :as handlers]
     [ring.swagger.core :as ring-swagger]
+    [ring.swagger.ui :as ring-swagger-ui]
     [clojure.set :refer [map-invert]]
     [schema.core :as s]
     [ring.middleware.resource :as resource]))
 
-(defn- generate-nickname [annotated-handler]
-  (str (:api annotated-handler) (get-in annotated-handler [:info :source-map :name])))
+(defn- generate-nickname [prefix annotated-handler]
+  (str prefix (get-in annotated-handler [:info :source-map :name])))
 
 (defn- convert-parameters [request]
   (for [[type f] {:body :body, :query :query-params, :path :uri-args}]
@@ -25,7 +26,7 @@
               :uri path
               :metadata {:summary description
                          :return (get responses 200)
-                         :nickname (generate-nickname annotated-handler)
+                         :nickname (generate-nickname prefix annotated-handler)
                          :parameters (convert-parameters request)}}))))
 
 (defn collect-resource-meta [api-routes [ns-sym prefix]]
@@ -39,7 +40,9 @@
     (reduce collect-resource-meta api-routes ns-sym->prefix)))
 
 (defn swagger-ui [handler]
-  (resource/wrap-resource handler "swagger-ui"))
+  (let [ui (ring-swagger-ui/swagger-ui)]
+    (fn [request]
+      (or (ui request) (handler request)))))
 
 (defnk $api-docs$GET
   "Apidocs"
