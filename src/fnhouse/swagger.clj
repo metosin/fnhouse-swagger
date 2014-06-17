@@ -20,8 +20,7 @@
   (letk [[[:info method path description request responses
            [:source-map ns]]] annotated-handler]
     (let [prefix (ns-sym->prefix (symbol ns))]
-      (update-in api-routes [prefix]
-        update-in [:routes]
+      (update-in api-routes [prefix :routes]
         conj {:method method
               :uri path
               :metadata {:summary description
