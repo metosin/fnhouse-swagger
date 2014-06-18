@@ -16,6 +16,10 @@
   (for [[type f] {:body :body, :query :query-params, :path :uri-args}]
     {:type type :model (f request)}))
 
+(defn- convert-response-messages [responses]
+  (for [[code model] responses]
+    {:code code, :message "", :responseModel model}))
+
 (defn collect-route [ns-sym->prefix api-routes annotated-handler]
   (letk [[[:info method path description request responses
            [:source-map ns]]] annotated-handler]
@@ -26,6 +30,7 @@
               :metadata {:summary description
                          :return (get responses 200)
                          :nickname (generate-nickname prefix annotated-handler)
+                         :responseMessages (convert-response-messages responses)
                          :parameters (convert-parameters request)}}))))
 
 (defn collect-resource-meta [api-routes [ns-sym prefix]]

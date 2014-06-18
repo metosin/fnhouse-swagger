@@ -3,10 +3,10 @@
   :url "https://github.com/Prismatic/fnhouse/"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[prismatic/plumbing "0.3.1"]
+  :dependencies [[prismatic/plumbing "0.3.2"]
                  [prismatic/fnhouse "0.1.0"]
                  [metosin/fnhouse-swagger "0.2.0"]
-                 [metosin/ring-swagger "0.9.1"]
+                 [metosin/ring-swagger "0.10.0"]
                  [metosin/ring-swagger-ui "2.0.16-2"]
                  [org.clojure/clojure "1.6.0"]
                  [clj-http "0.9.2"]
