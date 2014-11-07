@@ -54,10 +54,11 @@
   [[:resources swagger]]
   (ring-swagger/api-listing {} swagger))
 
-(defnk $api-docs$:resource$GET
+(defnk $api-docs$:**$GET
   "Apidoc"
   {:responses {200 s/Any}}
-  [[:request [:uri-args resource :- String] :as request]
+  [[:request uri-args :as request]
    [:resources swagger]]
-  (ring-swagger/api-declaration {} swagger resource
-    (ring-swagger/basepath request)))
+  (let [resource (safe-get uri-args :**)]
+    (ring-swagger/api-declaration {} swagger resource
+      (ring-swagger/basepath request))))
