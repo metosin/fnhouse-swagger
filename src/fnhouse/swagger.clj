@@ -45,10 +45,7 @@
         api-routes (reduce (partial collect-route ns-sym->prefix) {} handlers)]
     (reduce collect-resource-meta api-routes ns-sym->prefix)))
 
-(defn swagger-ui [handler]
-  (let [ui (ring-swagger-ui/swagger-ui)]
-    (fn [request]
-      (or (ui request) (handler request)))))
+(def swagger-ui ring-swagger-ui/wrap-swagger-ui)
 
 (defnk $api-docs$GET
   "Apidocs"
