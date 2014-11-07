@@ -11,7 +11,7 @@ This is an alpha release, like fnhouse itself.
 ## Latest version
 
 ```clojure
-[metosin/fnhouse-swagger "0.3.0"]
+[metosin/fnhouse-swagger "0.4.0"]
 ```
 
 check out [release notes](https://github.com/metosin/fnhouse-swagger/releases).
@@ -26,7 +26,7 @@ to use the embedded [swagger-ui](https://github.com/wordnik/swagger-ui),
 add a dependency to latest [ring-swagger-ui](https://github.com/metosin/ring-swagger-ui)
 and add add a ring-route `swagger-ui` to your app.
 
-needed changes are isolated in this [commit](https://github.com/metosin/fnhouse-swagger/commit/09fbbff348d1240f24b82962fbcb5ec4dcbca4d2).
+see swagger bootstrapping [in action](https://github.com/metosin/fnhouse-swagger/blob/master/examples/guesthouse/src/guesthouse/core.clj#L29-L53) at the Guesthouse.
 
 ## Examples
 
