@@ -36,6 +36,7 @@
     (-> resources
         (assoc :api-docs all-docs)
         (assoc :swagger swagger)
+        (assoc :swagger-parameters {})
         ((handlers/curry-resources proto-handlers)))))
 
 (defn wrapped-root-handler
