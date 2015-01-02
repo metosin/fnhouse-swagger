@@ -2,10 +2,8 @@
   (:require [fnhouse.swagger :refer :all]
             [midje.sweet :refer :all]
 
-            [plumbing.core :refer [defnk fn->]]
+            [plumbing.core :refer [defnk]]
             [fnhouse.handlers :as handlers]
-            [fnhouse.routes :as routes]
-            [fnhouse.middleware :as middleware]
             [schema.core :as s]))
 
 ;;
@@ -28,7 +26,7 @@
   {:body (assoc Makkara :id 1)})
 
 ;;
-;; Public api
+;; Facts
 ;;
 
 (fact "collect-routes"
