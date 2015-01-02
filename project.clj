@@ -6,5 +6,11 @@
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [prismatic/plumbing "0.3.5"]
                  [prismatic/fnhouse "0.1.1"]
-                 [metosin/ring-swagger "0.14.0"]
-                 [ring/ring-core "1.3.1"]])
+                 [metosin/ring-swagger "0.16.0-SNAPSHOT"]
+                 [ring/ring-core "1.3.2"]]
+  :profiles {:dev {:plugins [[lein-clojars "0.9.1"]
+                             [lein-midje "3.1.3"]]
+                   :dependencies [[midje "1.6.3"]]}
+             :1.7 {:dependencies [[org.clojure/clojure "1.7.0-alpha4"]]}}
+  :aliases {"all" ["with-profile" "dev:dev,1.7"]
+            "test-ancient" ["midje"]})

@@ -1,3 +1,12 @@
+## 0.5.0-SNAPSHOT (xx.xx.xxxx)
+
+- Swagger 2.0
+- updated deps:
+```
+[metosin/ring-swagger "0.16.0-SNAPSHOT"] is available but we use "0.14.0"
+[ring/ring-core "1.3.2"] is available but we use "1.3.1"
+```
+
 ## 0.4.0 (7.11.2014)
 
 - allow prefixed resources (https://github.com/metosin/fnhouse-swagger/pull/1)
