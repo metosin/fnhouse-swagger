@@ -1,13 +1,11 @@
 (ns fnhouse.swagger
   "Swagger documentation"
-  (:use plumbing.core)
   (:require
-    [fnhouse.handlers :as handlers]
+    [plumbing.core :refer :all]
     [ring.swagger.core :as ring-swagger]
     [ring.swagger.ui :as ring-swagger-ui]
     [clojure.set :refer [map-invert]]
-    [schema.core :as s]
-    [ring.middleware.resource :as resource]))
+    [schema.core :as s]))
 
 (defn- generate-nickname [prefix annotated-handler]
   (str prefix (get-in annotated-handler [:info :source-map :name])))
