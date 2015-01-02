@@ -42,28 +42,27 @@
          :routes [{:method :post
                    :uri "/makkarat/"
                    :metadata {:summary "Adds a Makkara"
-                              :return {:id Long
-                                       :name String
-                                       :size (s/enum :L :M :S)}
+                              :return Makkara
                               :nickname "makkarat$POST"
                               :responseMessages []
-                              :parameters [{:type :path, :model {}}
+                              :parameters [{:type :path
+                                            :model {}}
                                            {:type :query
                                             :model {s/Keyword String}}
                                            {:type :body
-                                            :model {:name String
-                                                    :size (s/enum :L :M :S)}}]}}
+                                            :model NewMakkara}]}}
                   {:method :get
                    :uri "/makkarat/:makkara-id"
                    :metadata {:summary "Adds a Makkara"
-                              :return {:id Long
-                                       :name String
-                                       :size (s/enum :L :M :S)}
+                              :return Makkara
                               :nickname "makkarat$:makkara-id$GET"
                               :responseMessages []
-                              :parameters [{:type :path, :model {:makkara-id Long}}
-                                           {:type :query :model {s/Keyword String}}
-                                           {:type :body, :model nil}]}}]}}))
+                              :parameters [{:type :path
+                                            :model {:makkara-id Long}}
+                                           {:type :query
+                                            :model {s/Keyword String}}
+                                           {:type :body
+                                            :model nil}]}}]}}))
 
 (fact "swagger-ui (requires swagger-ui dependency)"
   (let [{:keys [status body]} ((wrap-swagger-ui identity)
