@@ -27,17 +27,6 @@
   [[:request body :- NewMakkara]]
   {:body (assoc Makkara :id 1)})
 
-(let [prefix->ns-sym {"makkarat" 'fnhouse.swagger-test
-                      "api" 'fnhouse.swagger}
-      proto-handlers (handlers/nss->proto-handlers prefix->ns-sym)
-      swagger (collect-routes proto-handlers prefix->ns-sym)
-      _ (./pprint proto-handlers)
-      app (-> {:swagger swagger}
-              ((handlers/curry-resources proto-handlers))
-              #_(map (fn-> middleware/coercion-middleware (constantly nil) (constantly nil)))
-              routes/root-handler)]
-  app)
-
 ;;
 ;; Public api
 ;;
@@ -46,8 +35,35 @@
   (let [prefix->ns-sym {"makkarat" 'fnhouse.swagger-test}
         proto-handlers (handlers/nss->proto-handlers prefix->ns-sym)
         swagger (collect-routes proto-handlers prefix->ns-sym)]
-    swagger => {}
-  ))
+    swagger
+
+    => {"makkarat"
+        {:description nil
+         :routes [{:method :post
+                   :uri "/makkarat/"
+                   :metadata {:summary "Adds a Makkara"
+                              :return {:id Long
+                                       :name String
+                                       :size (s/enum :L :M :S)}
+                              :nickname "makkarat$POST"
+                              :responseMessages []
+                              :parameters [{:type :path, :model {}}
+                                           {:type :query
+                                            :model {s/Keyword String}}
+                                           {:type :body
+                                            :model {:name String
+                                                    :size (s/enum :L :M :S)}}]}}
+                  {:method :get
+                   :uri "/makkarat/:makkara-id"
+                   :metadata {:summary "Adds a Makkara"
+                              :return {:id Long
+                                       :name String
+                                       :size (s/enum :L :M :S)}
+                              :nickname "makkarat$:makkara-id$GET"
+                              :responseMessages []
+                              :parameters [{:type :path, :model {:makkara-id Long}}
+                                           {:type :query :model {s/Keyword String}}
+                                           {:type :body, :model nil}]}}]}}))
 
 (fact "swagger-ui (requires swagger-ui dependency)"
   (let [{:keys [status body]} ((wrap-swagger-ui identity)
