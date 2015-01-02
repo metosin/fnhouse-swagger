@@ -22,7 +22,7 @@
          :let [message (or (some-> model meta :message) "")]]
     {:code code, :message message, :responseModel model}))
 
-(defn collect-route [ns-sym->prefix api-routes annotated-handler]
+(defn- collect-route [ns-sym->prefix api-routes annotated-handler]
   (letk [[[:info method path description request responses
            [:source-map ns]]] annotated-handler]
     (let [prefix (ns-sym->prefix (symbol ns))]
@@ -35,7 +35,7 @@
                          :responseMessages (convert-response-messages responses)
                          :parameters (convert-parameters request)}}))))
 
-(defn collect-resource-meta [api-routes [ns-sym prefix]]
+(defn- collect-resource-meta [api-routes [ns-sym prefix]]
   (letk [[{doc nil}] (meta (the-ns ns-sym))]
     (update-in api-routes [prefix]
       assoc :description doc)))
