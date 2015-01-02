@@ -40,12 +40,16 @@
     (update-in api-routes [prefix]
       assoc :description doc)))
 
+;;
+;; Public API
+;;
+
 (defn collect-routes [handlers prefix->ns-sym]
   (let [ns-sym->prefix (map-invert prefix->ns-sym)
         api-routes (reduce (partial collect-route ns-sym->prefix) {} handlers)]
     (reduce collect-resource-meta api-routes ns-sym->prefix)))
 
-(def swagger-ui ring-swagger-ui/wrap-swagger-ui)
+(def wrap-swagger-ui ring-swagger-ui/wrap-swagger-ui)
 
 (defnk $api-docs$GET
   "Apidocs"
