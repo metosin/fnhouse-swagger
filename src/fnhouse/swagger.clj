@@ -51,6 +51,10 @@
 
 (def wrap-swagger-ui ring-swagger-ui/wrap-swagger-ui)
 
+;;
+;; Swagger 1.2 Endpoints
+;;
+
 (defnk $api-docs$GET
   "Apidocs"
   {:responses {200 s/Any}}
