@@ -41,7 +41,7 @@
                    :uri "/makkarat/"
                    :metadata {:summary "Adds a Makkara"
                               :return Makkara
-                              :nickname "makkarat$POST"
+                              :nickname "$POST"
                               :responseMessages []
                               :parameters [{:type :path
                                             :model {}}
@@ -53,7 +53,7 @@
                    :uri "/makkarat/:makkara-id"
                    :metadata {:summary "Adds a Makkara"
                               :return Makkara
-                              :nickname "makkarat$:makkara-id$GET"
+                              :nickname "$:makkara-id$GET"
                               :responseMessages []
                               :parameters [{:type :path
                                             :model {:makkara-id Long}}

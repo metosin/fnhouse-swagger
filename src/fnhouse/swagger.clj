@@ -7,8 +7,12 @@
     [clojure.set :refer [map-invert]]
     [schema.core :as s]))
 
-(defn- generate-nickname [prefix annotated-handler]
-  (str prefix (get-in annotated-handler [:info :source-map :name])))
+;;
+;; Internals
+;;
+
+(defn- generate-nickname [annotated-handler]
+  (get-in annotated-handler [:info :source-map :name]))
 
 (defn- convert-parameters [request]
   (for [[type f] {:body :body, :query :query-params, :path :uri-args}
@@ -31,7 +35,7 @@
               :uri path
               :metadata {:summary description
                          :return (get responses 200)
-                         :nickname (generate-nickname prefix annotated-handler)
+                         :nickname (generate-nickname annotated-handler)
                          :responseMessages (convert-response-messages responses)
                          :parameters (convert-parameters request)}}))))
 
