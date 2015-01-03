@@ -11,8 +11,10 @@
   (str prefix (get-in annotated-handler [:info :source-map :name])))
 
 (defn- convert-parameters [request]
-  (for [[type f] {:body :body, :query :query-params, :path :uri-args}]
-    {:type type :model (f request)}))
+  (for [[type f] {:body :body, :query :query-params, :path :uri-args}
+        :let [model (f request)]
+        :when model]
+    {:type type :model model}))
 
 (defn- convert-response-messages [responses]
   (for [[code model] responses

@@ -58,9 +58,7 @@
                               :parameters [{:type :path
                                             :model {:makkara-id Long}}
                                            {:type :query
-                                            :model {s/Keyword String}}
-                                           {:type :body
-                                            :model nil}]}}]}}))
+                                            :model {s/Keyword String}}]}}]}}))
 
 (fact "swagger-ui (requires swagger-ui dependency)"
   (let [{:keys [status body]} ((wrap-swagger-ui identity)
