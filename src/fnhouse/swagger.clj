@@ -21,7 +21,7 @@
 
 (defn- convert-responses [responses]
   (for-map [[code model] responses
-         :let [message (or (some-> model meta :message) "")]]
+            :let [message (or (some-> model meta :message) "")]]
     code {:description message, :schema model}))
 
 (defn- dont-collect? [ns]
@@ -63,4 +63,4 @@
   "Swagger 2.0 Specs"
   {:responses {200 s/Any}}
   [[:resources swagger]]
-  (ring-swagger2/swagger-json swagger))
+  {:body (ring-swagger2/swagger-json swagger)})
