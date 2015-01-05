@@ -32,7 +32,8 @@
   (letk [[[:info method path description request responses annotations
            [:source-map ns]]] annotated-handler]
     (let [ns-sym (symbol ns)
-          prefix (ns-sym->prefix ns-sym)]
+          prefix (ns-sym->prefix ns-sym)
+          extra-metadata (or (extra-metadata-fn annotations) {})]
       (if (ignore-ns? ns-sym)
         api-routes
         (update-in api-routes [prefix :routes]
