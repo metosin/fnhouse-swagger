@@ -28,15 +28,15 @@
 (defn- ignore-ns? [ns-sym]
   (:no-doc (meta (the-ns ns-sym))))
 
-(defn collect-route [ns-sym->prefix extra-metadata-fn api-routes annotated-handler]
+(defn collect-route [ns-sym->prefix extra-metadata-fn routes annotated-handler]
   (letk [[[:info method path description request responses annotations
            [:source-map ns]]] annotated-handler]
     (let [ns-sym (symbol ns)
           prefix (ns-sym->prefix ns-sym)
           extra-metadata (or (extra-metadata-fn annotations) {})]
       (if (ignore-ns? ns-sym)
-        api-routes
-        (update-in api-routes [prefix :routes]
+        routes
+        (update-in routes [prefix :routes]
                    conj {:method method
                          :uri path
                          :metadata (merge
@@ -69,8 +69,8 @@
     (collect-routes handlers prefix->ns-sym (constantly {})))
   ([handlers prefix->ns-sym extra-metadata-fn]
     (let [ns-sym->prefix (map-invert prefix->ns-sym)
-          reducer (partial collect-route ns-sym->prefix extra-metadata-fn)
-          api-routes (reduce reducer {} handlers)]
+          route-collector (partial collect-route ns-sym->prefix extra-metadata-fn)
+          api-routes (reduce route-collector {} handlers)]
       (reduce collect-resource-meta api-routes ns-sym->prefix))))
 
 (def wrap-swagger-ui ring-swagger-ui/wrap-swagger-ui)
