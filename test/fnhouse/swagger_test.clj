@@ -1,5 +1,5 @@
-(ns fnhouse.swagger12-test
-  (:require [fnhouse.swagger12 :refer :all]
+(ns fnhouse.swagger-test
+  (:require [fnhouse.swagger :refer :all]
             [midje.sweet :refer :all]
             [fnhouse.makkara :as m]
             [plumbing.core :refer [defnk]]
