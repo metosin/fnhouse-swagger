@@ -1,8 +1,16 @@
-## 0.5.0-SNAPSHOT (xx.xx.xxxx)
+## 0.5.0 (xx.xx.xxxx)
 
-- Swagger 2.0
+- ships with both Swagger 1.2 & 2.0 Support:
+  - **1.2**: `fnhouse.swagger12`
+  - **2.0**: `fnhouse.swagger`
+- updated guesthouse to use Swagger 2.0
+- added tests for both 1.2 & 2.0 generation
+- adding `no-doc: true` metadata to fnhouse defnk namespaces causes the handlers
+in that namespace not to be collected into swagger docs
+- **breaking change**: `fnhouse.swagger/swagger-ui` is now
+`fnhouse.swagger/wrap-swagger.ui`.
 - updated deps:
-```
+```clojure
 [metosin/ring-swagger "0.16.0-SNAPSHOT"] is available but we use "0.14.0"
 [ring/ring-core "1.3.2"] is available but we use "1.3.1"
 ```
