@@ -1,4 +1,4 @@
-(defproject metosin/fnhouse-swagger "0.4.0"
+(defproject metosin/fnhouse-swagger "0.5.0-SNAPSHOT"
   :description "Swagger-support for fnhouse"
   :url "https://github.com/metosin/fnhouse-swagger"
   :license {:name "Eclipse Public License"
@@ -11,7 +11,7 @@
   :profiles {:dev {:plugins [[lein-clojars "0.9.1"]
                              [lein-midje "3.1.3"]]
                    :dependencies [[midje "1.7.0-SNAPSHOT"]
-                                  [metosin/ring-swagger-ui "2.0.17"]]}
+                                  [metosin/ring-swagger-ui "2.0.24"]]}
              :1.7 {:dependencies [[org.clojure/clojure "1.7.0-alpha4"]]}}
   :aliases {"all" ["with-profile" "dev:dev,1.7"]
             "test-ancient" ["midje"]})
