@@ -25,14 +25,15 @@
          :let [message (or (some-> model meta :message) "")]]
     {:code code, :message message, :responseModel model}))
 
-(defn- dont-collect? [ns]
-  (:no-doc (meta (the-ns ns))))
+(defn- ignore-ns? [ns-sym]
+  (:no-doc (meta (the-ns ns-sym))))
 
 (defn- collect-route [ns-sym->prefix api-routes annotated-handler]
   (letk [[[:info method path description request responses
            [:source-map ns]]] annotated-handler]
-    (let [prefix (ns-sym->prefix (symbol ns))]
-      (if (dont-collect? (symbol ns))
+    (let [ns-sym (symbol ns)
+          prefix (ns-sym->prefix ns-sym)]
+      (if (ignore-ns? ns-sym)
         api-routes
         (update-in api-routes [prefix :routes]
                    conj {:method   method
@@ -45,7 +46,7 @@
 
 (defn- collect-resource-meta [api-routes [ns-sym prefix]]
   (letk [[{doc nil}] (meta (the-ns ns-sym))]
-    (if (dont-collect? ns-sym)
+    (if (ignore-ns? ns-sym)
       api-routes
       (update-in api-routes [prefix]
                  assoc :description doc))))

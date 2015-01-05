@@ -21,14 +21,15 @@
             :let [message (or (some-> model meta :message) "")]]
     code {:description message, :schema model}))
 
-(defn- dont-collect? [ns]
-  (:no-doc (meta (the-ns ns))))
+(defn- ignore-ns? [ns-sym]
+  (:no-doc (meta (the-ns ns-sym))))
 
 (defn- collect-route [ns-sym->prefix api-routes annotated-handler]
   (letk [[[:info method path description request responses
            [:source-map ns]]] annotated-handler]
-    (let [prefix (ns-sym->prefix (symbol ns))]
-      (if (dont-collect? (symbol ns))
+    (let [ns-sym (symbol ns)
+          prefix (ns-sym->prefix ns-sym)]
+      (if (ignore-ns? ns-sym)
         api-routes
         (assoc-in api-routes [path method]
                   {:tags [prefix]
