@@ -10,7 +10,7 @@
                  [ring/ring-core "1.3.2"]]
   :profiles {:dev {:plugins [[lein-clojars "0.9.1"]
                              [lein-midje "3.1.3"]]
-                   :dependencies [[midje "1.6.3"]
+                   :dependencies [[midje "1.7.0-SNAPSHOT"]
                                   [metosin/ring-swagger-ui "2.0.17"]]}
              :1.7 {:dependencies [[org.clojure/clojure "1.7.0-alpha4"]]}}
   :aliases {"all" ["with-profile" "dev:dev,1.7"]

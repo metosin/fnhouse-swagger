@@ -7,7 +7,7 @@
             [schema.core :as s]))
 
 ;;
-;; Swagger 1.2
+;; Swagger 2.0
 ;;
 
 (fact "collect-routes"
