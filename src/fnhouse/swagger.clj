@@ -20,9 +20,9 @@
     type model))
 
 (defn- convert-responses [responses]
-  (for [[code model] responses
+  (for-map [[code model] responses
          :let [message (or (some-> model meta :message) "")]]
-    {:code code, :description message, :schema model}))
+    code {:description message, :schema model}))
 
 (defn- dont-collect? [ns]
   (:no-doc (meta (the-ns ns))))

@@ -32,9 +32,8 @@
                               :operationId "$POST",
                               :parameters {:body m/NewMakkara
                                            :query {s/Keyword s/Str}}
-                              :responses [{:code 200
-                                           :description ""
-                                           :schema m/Makkara}]
+                              :responses {200 {:description ""
+                                               :schema m/Makkara}}
                               :summary "Adds a Makkara"
                               :tags ["makkarat"]}]
          "/makkarat/:makkara-id" [{:description "Adds a Makkara"
@@ -42,8 +41,8 @@
                                    :operationId "$:makkara-id$GET"
                                    :parameters {:path {:makkara-id Long}
                                                 :query {s/Keyword s/Str}}
-                                   :responses [{:code 200, :description ""
-                                                :schema m/Makkara}]
+                                   :responses {200 {:description ""
+                                                    :schema m/Makkara}}
                                    :summary "Adds a Makkara"
                                    :tags ["makkarat"]}]}}))
 
