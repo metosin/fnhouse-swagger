@@ -31,6 +31,17 @@ see swagger bootstrapping [in action](https://github.com/metosin/fnhouse-swagger
 
 Guesthouse with fnhouse-swagger is found [here](https://github.com/metosin/fnhouse-swagger/tree/master/examples/guesthouse).
 
+Running the example:
+
+```
+git clone git@github.com:metosin/fnhouse-swagger.git
+cd fnhouse-swagger/examples/guesthouse/src
+lein repl
+> (use 'guesthouse.core)
+> (start)
+```
+
+
 ## License
 
 Copyright © 2014 Metosin Oy
