@@ -4,6 +4,7 @@
             [fnhouse.makkara :as m]
             [plumbing.core :refer [defnk]]
             [fnhouse.handlers :as handlers]
+            [ring.swagger.core2 :as swagger]
             [schema.core :as s]))
 
 ;;
@@ -13,39 +14,40 @@
 (fact "collect-routes"
   (let [prefix->ns-sym {"makkarat" 'fnhouse.makkara}
         proto-handlers (handlers/nss->proto-handlers prefix->ns-sym)
-        swagger (collect-routes proto-handlers prefix->ns-sym {:info {:title "Makkara API"
+        swagger (collect-routes proto-handlers prefix->ns-sym {:info {:title   "Makkara API"
                                                                       :version "1.0"}})]
 
+    (fact "produces valid Swagger-data"
+      (swagger/validate swagger) => nil)
 
-    (./aprint swagger)
+    (fact "is mapped correctly"
 
-    #_#_=> {"makkarat"
-        {:description nil
-         :routes [{:method :post
-                   :uri "/makkarat/"
-                   :metadata {:summary "Adds a Makkara"
-                              :return m/Makkara
-                              :nickname "$POST"
-                              :responseMessages []
-                              :parameters [{:type :path
-                                            :model {}}
-                                           {:type :query
-                                            :model {s/Keyword String}}
-                                           {:type :body
-                                            :model m/NewMakkara}]}}
-                  {:method :get
-                   :uri "/makkarat/:makkara-id"
-                   :metadata {:summary "Adds a Makkara"
-                              :return m/Makkara
-                              :nickname "$:makkara-id$GET"
-                              :responseMessages []
-                              :parameters [{:type :path
-                                            :model {:makkara-id Long}}
-                                           {:type :query
-                                            :model {s/Keyword String}}]}}]}}))
+      swagger =>
 
-(fact "swagger-ui (requires swagger-ui dependency)"
-  (let [{:keys [status body]} ((wrap-swagger-ui identity)
-                                {:uri "/index.html"})]
-    status => 200
-    (slurp body) => (contains "swagger")))
+      {:info {:title "Makkara API"
+              :version "1.0"}
+       :paths {"/makkarat/" [{:description "Adds a Makkara"
+                              :method :post
+                              :operationId "$POST",
+                              :parameters {:body m/NewMakkara
+                                           :query {s/Keyword s/Str}}
+                              :responses [{:code 200
+                                           :description ""
+                                           :schema m/Makkara}]
+                              :summary "Adds a Makkara"
+                              :tags ["makkarat"]}]
+         "/makkarat/:makkara-id" [{:description "Adds a Makkara"
+                                   :method :get
+                                   :operationId "$:makkara-id$GET"
+                                   :parameters {:path {:makkara-id Long}
+                                                :query {s/Keyword s/Str}}
+                                   :responses [{:code 200, :description ""
+                                                :schema m/Makkara}]
+                                   :summary "Adds a Makkara"
+                                   :tags ["makkarat"]}]}}))
+
+  (fact "swagger-ui (requires swagger-ui dependency)"
+    (let [{:keys [status body]} ((wrap-swagger-ui identity)
+                                  {:uri "/index.html"})]
+      status => 200
+      (slurp body) => (contains "swagger"))))
