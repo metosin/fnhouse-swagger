@@ -1,6 +1,7 @@
 # fnhouse-swagger
 
 [![Build Status](https://travis-ci.org/metosin/fnhouse-swagger.svg?branch=master)](https://travis-ci.org/metosin/fnhouse-swagger)
+[![Dependencies Status](http://jarkeeper.com/metosin/fnhouse-swagger/status.png)](http://jarkeeper.com/metosin/fnhouse-swagger)
 
 [Swagger](https://helloreverb.com/developers/swagger) implementation
 for [fnhouse](https://github.com/Prismatic/fnhouse) using the
