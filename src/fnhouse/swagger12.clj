@@ -1,5 +1,4 @@
-(ns fnhouse.swagger12
-  "Swagger 1.2 documentation"
+(ns ^:no-doc fnhouse.swagger12
   (:require
     [plumbing.core :refer :all]
     [ring.swagger.core :as ring-swagger]
@@ -26,23 +25,30 @@
          :let [message (or (some-> model meta :message) "")]]
     {:code code, :message message, :responseModel model}))
 
+(defn- dont-collect? [ns]
+  (:no-doc (meta (the-ns ns))))
+
 (defn- collect-route [ns-sym->prefix api-routes annotated-handler]
   (letk [[[:info method path description request responses
            [:source-map ns]]] annotated-handler]
     (let [prefix (ns-sym->prefix (symbol ns))]
-      (update-in api-routes [prefix :routes]
-        conj {:method method
-              :uri path
-              :metadata {:summary description
-                         :return (get responses 200)
-                         :nickname (generate-nickname annotated-handler)
-                         :responseMessages (convert-response-messages responses)
-                         :parameters (convert-parameters request)}}))))
+      (if (dont-collect? (symbol ns))
+        api-routes
+        (update-in api-routes [prefix :routes]
+                   conj {:method   method
+                         :uri      path
+                         :metadata {:summary          description
+                                    :return           (get responses 200)
+                                    :nickname         (generate-nickname annotated-handler)
+                                    :responseMessages (convert-response-messages responses)
+                                    :parameters       (convert-parameters request)}})))))
 
 (defn- collect-resource-meta [api-routes [ns-sym prefix]]
   (letk [[{doc nil}] (meta (the-ns ns-sym))]
-    (update-in api-routes [prefix]
-      assoc :description doc)))
+    (if (dont-collect? ns-sym)
+      api-routes
+      (update-in api-routes [prefix]
+                 assoc :description doc))))
 
 ;;
 ;; Public API
