@@ -4,8 +4,7 @@
     [ring.swagger.core :as ring-swagger]
     [ring.swagger.ui :as ring-swagger-ui]
     [clojure.set :refer [map-invert]]
-    [schema.core :as s]
-    [ring.middleware.resource :as resource]))
+    [schema.core :as s]))
 
 ;;
 ;; Internals
