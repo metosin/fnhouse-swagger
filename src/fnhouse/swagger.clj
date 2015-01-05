@@ -3,6 +3,7 @@
   (:require
     [plumbing.core :refer :all]
     [ring.swagger.core :as ring-swagger]
+    [ring.swagger.core2 :as ring-swagger2]
     [ring.swagger.ui :as ring-swagger-ui]
     [clojure.set :refer [map-invert]]
     [schema.core :as s]))
@@ -73,3 +74,13 @@
   (let [resource (safe-get uri-args :**)]
     (ring-swagger/api-declaration {} swagger resource
       (ring-swagger/basepath request))))
+
+;;
+;; Swagger 2.0 Endpoint
+;;
+
+(defnk $swagger.json$GET
+  "Swagger 2.0 Specs"
+  {:responses {200 s/Any}}
+  [[:resources swagger]]
+  (ring-swagger2/swagger-json swagger))

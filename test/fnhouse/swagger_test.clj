@@ -26,7 +26,7 @@
   {:body (assoc Makkara :id 1)})
 
 ;;
-;; Facts
+;; Swagger 1.2
 ;;
 
 (fact "collect-routes"
@@ -65,3 +65,8 @@
                                 {:uri "/index.html"})]
     status => 200
     (slurp body) => (contains "swagger")))
+
+
+;;
+;; Swagger 2.0
+;;
