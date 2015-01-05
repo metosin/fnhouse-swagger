@@ -29,7 +29,6 @@
               :version "1.0"}
        :paths {"/makkarat/" [{:description "Adds a Makkara"
                               :method :post
-                              :operationId "$POST",
                               :parameters {:body m/NewMakkara
                                            :query {s/Keyword s/Str}}
                               :responses {200 {:description ""
@@ -38,7 +37,6 @@
                               :tags ["makkarat"]}]
          "/makkarat/:makkara-id" [{:description "Adds a Makkara"
                                    :method :get
-                                   :operationId "$:makkara-id$GET"
                                    :parameters {:path {:makkara-id Long}
                                                 :query {s/Keyword s/Str}}
                                    :responses {200 {:description ""

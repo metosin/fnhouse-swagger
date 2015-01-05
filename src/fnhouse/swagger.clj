@@ -41,7 +41,6 @@
                          :tags [prefix]
                          :summary description
                          :description description
-                         :operationId (operation-id annotated-handler)
                          :responses (convert-responses responses)
                          :parameters (convert-parameters request)})))))
 
