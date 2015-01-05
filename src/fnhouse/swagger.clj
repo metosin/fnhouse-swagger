@@ -1,8 +1,6 @@
-(ns fnhouse.swagger
-  "Swagger 2.0 documentation"
+(ns ^:no-doc fnhouse.swagger
   (:require
     [plumbing.core :refer :all]
-    [ring.swagger.core :as ring-swagger]
     [ring.swagger.core2 :as ring-swagger2]
     [ring.swagger.ui :as ring-swagger-ui]
     [clojure.set :refer [map-invert]]
@@ -26,18 +24,23 @@
          :let [message (or (some-> model meta :message) "")]]
     {:code code, :description message, :schema model}))
 
+(defn- dont-collect? [ns]
+  (:no-doc (meta (the-ns ns))))
+
 (defn- collect-route [ns-sym->prefix api-routes annotated-handler]
   (letk [[[:info method path description request responses
            [:source-map ns]]] annotated-handler]
     (let [prefix (ns-sym->prefix (symbol ns))]
-      (update-in api-routes [path]
-        conj {:method method
-              :tags [prefix]
-              :summary description
-              :description description
-              :operationId (operation-id annotated-handler)
-              :responses (convert-responses responses)
-              :parameters (convert-parameters request)}))))
+      (if (dont-collect? (symbol ns))
+        api-routes
+        (update-in api-routes [path]
+                   conj {:method method
+                         :tags [prefix]
+                         :summary description
+                         :description description
+                         :operationId (operation-id annotated-handler)
+                         :responses (convert-responses responses)
+                         :parameters (convert-parameters request)})))))
 
 ;;
 ;; Public API
