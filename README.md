@@ -25,15 +25,13 @@ to use the embedded [swagger-ui](https://github.com/wordnik/swagger-ui),
 add a dependency to latest [ring-swagger-ui](https://github.com/metosin/ring-swagger-ui)
 and add add a ring-route `swagger-ui` to your app.
 
-see swagger bootstrapping [in action](https://github.com/metosin/fnhouse-swagger/blob/master/examples/guesthouse/src/guesthouse/core.clj#L29-L53) at the Guesthouse.
-
 ## Examples
 
 Guesthouse with fnhouse-swagger is found [here](https://github.com/metosin/fnhouse-swagger/tree/master/examples/guesthouse).
 
 Running the example:
 
-```
+```bash
 git clone https://github.com/metosin/fnhouse-swagger.git
 cd fnhouse-swagger/examples/guesthouse/src
 lein repl
