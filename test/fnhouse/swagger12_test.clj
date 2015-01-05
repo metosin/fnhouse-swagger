@@ -33,7 +33,7 @@
                                             :model m/NewMakkara}]}}
                   {:method :get
                    :uri "/makkarat/:makkara-id"
-                   :metadata {:summary "Adds a Makkara"
+                   :metadata {:summary "Gets a Makkara"
                               :return m/Makkara
                               :nickname "$:makkara-id$GET"
                               :responseMessages []

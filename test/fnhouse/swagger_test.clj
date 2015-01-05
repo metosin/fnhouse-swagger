@@ -34,12 +34,12 @@
                                                      :schema m/Makkara}}
                                     :summary "Adds a Makkara"
                                     :tags ["makkarat"]}}
-               "/makkarat/:makkara-id" {:get {:description "Adds a Makkara"
+               "/makkarat/:makkara-id" {:get {:description "Gets a Makkara"
                                               :parameters {:path {:makkara-id Long}
                                                            :query {s/Keyword s/Str}}
                                               :responses {200 {:description ""
                                                                :schema m/Makkara}}
-                                              :summary "Adds a Makkara"
+                                              :summary "Gets a Makkara"
                                               :tags ["makkarat"]}}}}))
 
   (fact "swagger-ui (requires swagger-ui dependency)"

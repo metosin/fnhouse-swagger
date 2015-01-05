@@ -6,7 +6,7 @@
 (s/defschema NewMakkara (dissoc Makkara :id))
 
 (defnk $:makkara-id$GET
-  "Adds a Makkara"
+  "Gets a Makkara"
   {:responses {200 Makkara}}
   [[:request [:uri-args makkara-id :- Long]]]
   {:body {:id 1 :name "Musta" :size :L}})
