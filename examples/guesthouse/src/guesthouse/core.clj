@@ -50,7 +50,7 @@
        (map custom-coercion-middleware)
        routes/root-handler
        ring/ring-middleware
-       swagger/swagger-ui))
+       swagger/wrap-swagger-ui))
 
 (defn start-api
   "Take resources and server options, and spin up a server with jetty"
