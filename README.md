@@ -34,7 +34,7 @@ Guesthouse with fnhouse-swagger is found [here](https://github.com/metosin/fnhou
 Running the example:
 
 ```
-git clone git@github.com:metosin/fnhouse-swagger.git
+git clone https://github.com/metosin/fnhouse-swagger.git
 cd fnhouse-swagger/examples/guesthouse/src
 lein repl
 > (use 'guesthouse.core)
