@@ -13,10 +13,13 @@
 (fact "collect-routes"
   (let [prefix->ns-sym {"makkarat" 'fnhouse.makkara}
         proto-handlers (handlers/nss->proto-handlers prefix->ns-sym)
-        swagger (collect-routes proto-handlers prefix->ns-sym)]
-    swagger
+        swagger (collect-routes proto-handlers prefix->ns-sym {:info {:title "Makkara API"
+                                                                      :version "1.0"}})]
 
-    => {"makkarat"
+
+    (./aprint swagger)
+
+    #_#_=> {"makkarat"
         {:description nil
          :routes [{:method :post
                    :uri "/makkarat/"
