@@ -13,7 +13,7 @@ This is an alpha release, like fnhouse itself.
 
 [![Clojars Project](http://clojars.org/metosin/fnhouse-swagger/latest-version.svg)](http://clojars.org/metosin/fnhouse-swagger)
 
-check out [release notes](https://github.com/metosin/fnhouse-swagger/releases).
+[Release notes](https://github.com/metosin/fnhouse-swagger/releases)
 
 ## Usage
 
