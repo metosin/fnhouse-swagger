@@ -4,6 +4,7 @@
     [ring.swagger.core2 :as ring-swagger2]
     [ring.swagger.ui :as ring-swagger-ui]
     [clojure.set :refer [map-invert]]
+    [clojure.string :as str]
     [schema.core :as s]))
 
 ;;
@@ -11,7 +12,9 @@
 ;;
 
 (defn- operation-id [annotated-handler]
-  (get-in annotated-handler [:info :source-map :name]))
+  (-> annotated-handler
+      (get-in [:info :source-map :name])
+      (str/replace #"\$|:|-" "_")))
 
 (defn- convert-parameters [request]
   (for-map [[type f] {:body :body, :query :query-params, :path :uri-args}
