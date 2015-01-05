@@ -46,10 +46,12 @@
 ;; Public API
 ;;
 
-(defn collect-routes [handlers prefix->ns-sym base]
-  (let [ns-sym->prefix (map-invert prefix->ns-sym)
-        api-routes (reduce (partial collect-route ns-sym->prefix) {} handlers)]
-    (assoc base :paths api-routes)))
+(defn collect-routes
+  ([handlers prefix->ns-sym] (collect-routes handlers prefix->ns-sym {}))
+  ([handlers prefix->ns-sym base]
+    (let [ns-sym->prefix (map-invert prefix->ns-sym)
+          api-routes (reduce (partial collect-route ns-sym->prefix) {} handlers)]
+      (assoc base :paths api-routes))))
 
 (def wrap-swagger-ui ring-swagger-ui/wrap-swagger-ui)
 
