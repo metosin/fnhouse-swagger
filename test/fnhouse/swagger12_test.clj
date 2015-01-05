@@ -1,5 +1,5 @@
-(ns fnhouse.swagger-test
-  (:require [fnhouse.swagger :refer :all]
+(ns fnhouse.swagger12-test
+  (:require [fnhouse.swagger12 :refer :all]
             [midje.sweet :refer :all]
 
             [plumbing.core :refer [defnk]]
@@ -30,7 +30,7 @@
 ;;
 
 (fact "collect-routes"
-  (let [prefix->ns-sym {"makkarat" 'fnhouse.swagger-test}
+  (let [prefix->ns-sym {"makkarat" 'fnhouse.swagger12-test}
         proto-handlers (handlers/nss->proto-handlers prefix->ns-sym)
         swagger (collect-routes proto-handlers prefix->ns-sym)]
     swagger
@@ -65,8 +65,3 @@
                                 {:uri "/index.html"})]
     status => 200
     (slurp body) => (contains "swagger")))
-
-
-;;
-;; Swagger 2.0
-;;

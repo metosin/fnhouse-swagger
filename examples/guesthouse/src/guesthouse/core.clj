@@ -13,7 +13,7 @@
    [fnhouse.handlers :as handlers]
    [fnhouse.middleware :as middleware]
    [fnhouse.routes :as routes]
-   [fnhouse.swagger :as swagger]
+   [fnhouse.swagger12 :as swagger]
    [guesthouse.guestbook :as guestbook]
    [guesthouse.ring :as ring]
    [guesthouse.schemas :as schemas]))
@@ -29,7 +29,7 @@
 (defn attach-docs [resources prefix->ns-sym]
   (let [prefix->ns-sym (-> prefix->ns-sym
                            (assoc "docs" 'fnhouse.docs)
-                           (assoc "api" 'fnhouse.swagger))
+                           (assoc "api" 'fnhouse.swagger12))
         proto-handlers (handlers/nss->proto-handlers prefix->ns-sym)
         swagger (swagger/collect-routes proto-handlers prefix->ns-sym)
         all-docs (docs/all-docs (map :info proto-handlers))]

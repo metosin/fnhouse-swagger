@@ -1,9 +1,8 @@
-(ns fnhouse.swagger
-  "Swagger 2.0 documentation"
+(ns fnhouse.swagger12
+  "Swagger 1.2 documentation"
   (:require
     [plumbing.core :refer :all]
     [ring.swagger.core :as ring-swagger]
-    [ring.swagger.core2 :as ring-swagger2]
     [ring.swagger.ui :as ring-swagger-ui]
     [clojure.set :refer [map-invert]]
     [schema.core :as s]))
@@ -57,11 +56,20 @@
 (def wrap-swagger-ui ring-swagger-ui/wrap-swagger-ui)
 
 ;;
-;; Swagger 2.0 Endpoint
+;; Swagger 1.2 Endpoints
 ;;
 
-(defnk $swagger.json$GET
-  "Swagger 2.0 Specs"
+(defnk $api-docs$GET
+  "Apidocs"
   {:responses {200 s/Any}}
   [[:resources swagger]]
-  (ring-swagger2/swagger-json swagger))
+  (ring-swagger/api-listing {} swagger))
+
+(defnk $api-docs$:**$GET
+  "Apidoc"
+  {:responses {200 s/Any}}
+  [[:request uri-args :as request]
+   [:resources swagger]]
+  (let [resource (safe-get uri-args :**)]
+    (ring-swagger/api-declaration {} swagger resource
+      (ring-swagger/basepath request))))
