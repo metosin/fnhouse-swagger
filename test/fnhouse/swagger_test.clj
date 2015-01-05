@@ -4,7 +4,7 @@
             [fnhouse.makkara :as m]
             [plumbing.core :refer [defnk]]
             [fnhouse.handlers :as handlers]
-            [ring.swagger.core2 :as swagger]
+            [ring.swagger.spec2 :as swagger]
             [schema.core :as s]))
 
 ;;

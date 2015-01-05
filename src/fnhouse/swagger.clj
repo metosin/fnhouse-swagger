@@ -1,8 +1,8 @@
 (ns ^:no-doc fnhouse.swagger
   (:require
     [plumbing.core :refer :all]
-    [ring.swagger.core2 :as ring-swagger2]
-    [ring.swagger.ui :as ring-swagger-ui]
+    [ring.swagger.spec2 :as swagger]
+    [ring.swagger.ui :as swagger-ui]
     [clojure.set :refer [map-invert]]
     [schema.core :as s]))
 
@@ -48,7 +48,7 @@
           api-routes (reduce (partial collect-route ns-sym->prefix) {} handlers)]
       (assoc base :paths api-routes))))
 
-(def wrap-swagger-ui ring-swagger-ui/wrap-swagger-ui)
+(def wrap-swagger-ui swagger-ui/wrap-swagger-ui)
 
 ;;
 ;; Swagger 2.0 Endpoint
@@ -58,4 +58,4 @@
   "Swagger 2.0 Specs"
   {:responses {200 s/Any}}
   [[:resources swagger]]
-  {:body (ring-swagger2/swagger-json swagger)})
+  {:body (swagger/swagger-json swagger)})
