@@ -16,10 +16,10 @@
   (get-in annotated-handler [:info :source-map :name]))
 
 (defn- convert-parameters [request]
-  (for [[type f] {:body :body, :query :query-params, :path :uri-args}
-        :let [model (f request)]
-        :when model]
-    {:type type :model model}))
+  (for-map [[type f] {:body :body, :query :query-params, :path :uri-args}
+            :let [model (f request)]
+            :when (and model (not (empty? model)))]
+    type model))
 
 (defn- convert-responses [responses]
   (for [[code model] responses
