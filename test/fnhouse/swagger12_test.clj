@@ -11,7 +11,8 @@
 ;;
 
 (fact "collect-routes"
-  (let [prefix->ns-sym {"makkarat" 'fnhouse.makkara}
+  (let [prefix->ns-sym {"makkarat" 'fnhouse.makkara
+                        "api" 'fnhouse.swagger12}
         proto-handlers (handlers/nss->proto-handlers prefix->ns-sym)
         swagger (collect-routes proto-handlers prefix->ns-sym)]
     swagger
