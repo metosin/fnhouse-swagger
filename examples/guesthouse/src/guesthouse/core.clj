@@ -27,9 +27,7 @@
    schemas/entry-coercer))
 
 (defn attach-docs [resources prefix->ns-sym]
-  (let [prefix->ns-sym (-> prefix->ns-sym
-                           (assoc "docs" 'fnhouse.docs)
-                           (assoc "api" 'fnhouse.swagger12))
+  (let [prefix->ns-sym (assoc prefix->ns-sym "" 'fnhouse.swagger)
         proto-handlers (handlers/nss->proto-handlers prefix->ns-sym)
         swagger (swagger/collect-routes proto-handlers prefix->ns-sym)
         all-docs (docs/all-docs (map :info proto-handlers))]
