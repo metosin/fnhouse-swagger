@@ -13,7 +13,7 @@
    [fnhouse.handlers :as handlers]
    [fnhouse.middleware :as middleware]
    [fnhouse.routes :as routes]
-   [fnhouse.swagger12 :as swagger]
+   [fnhouse.swagger :as swagger]
    [guesthouse.guestbook :as guestbook]
    [guesthouse.ring :as ring]
    [guesthouse.schemas :as schemas]))
