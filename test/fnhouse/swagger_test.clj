@@ -27,22 +27,20 @@
 
       {:info {:title "Makkara API"
               :version "1.0"}
-       :paths {"/makkarat/" [{:description "Adds a Makkara"
-                              :method :post
-                              :parameters {:body m/NewMakkara
-                                           :query {s/Keyword s/Str}}
-                              :responses {200 {:description ""
-                                               :schema m/Makkara}}
-                              :summary "Adds a Makkara"
-                              :tags ["makkarat"]}]
-         "/makkarat/:makkara-id" [{:description "Adds a Makkara"
-                                   :method :get
-                                   :parameters {:path {:makkara-id Long}
-                                                :query {s/Keyword s/Str}}
-                                   :responses {200 {:description ""
-                                                    :schema m/Makkara}}
-                                   :summary "Adds a Makkara"
-                                   :tags ["makkarat"]}]}}))
+       :paths {"/makkarat/" {:post {:description "Adds a Makkara"
+                                    :parameters {:body m/NewMakkara
+                                                 :query {s/Keyword s/Str}}
+                                    :responses {200 {:description ""
+                                                     :schema m/Makkara}}
+                                    :summary "Adds a Makkara"
+                                    :tags ["makkarat"]}}
+               "/makkarat/:makkara-id" {:get {:description "Adds a Makkara"
+                                              :parameters {:path {:makkara-id Long}
+                                                           :query {s/Keyword s/Str}}
+                                              :responses {200 {:description ""
+                                                               :schema m/Makkara}}
+                                              :summary "Adds a Makkara"
+                                              :tags ["makkarat"]}}}}))
 
   (fact "swagger-ui (requires swagger-ui dependency)"
     (let [{:keys [status body]} ((wrap-swagger-ui identity)

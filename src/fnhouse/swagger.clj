@@ -30,13 +30,12 @@
     (let [prefix (ns-sym->prefix (symbol ns))]
       (if (dont-collect? (symbol ns))
         api-routes
-        (update-in api-routes [path]
-                   conj {:method method
-                         :tags [prefix]
-                         :summary description
-                         :description description
-                         :responses (convert-responses responses)
-                         :parameters (convert-parameters request)})))))
+        (assoc-in api-routes [path method]
+                  {:tags [prefix]
+                   :summary description
+                   :description description
+                   :responses (convert-responses responses)
+                   :parameters (convert-parameters request)})))))
 
 ;;
 ;; Public API
