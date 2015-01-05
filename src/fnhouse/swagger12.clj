@@ -58,13 +58,6 @@
 ;; Public API
 ;;
 
-(defn collect-routes [handlers prefix->ns-sym]
-  (let [ns-sym->prefix (map-invert prefix->ns-sym)
-        api-routes (reduce (partial collect-route ns-sym->prefix) {} handlers)]
-    (reduce collect-resource-meta api-routes ns-sym->prefix)))
-
-(def wrap-swagger-ui ring-swagger-ui/wrap-swagger-ui)
-
 (defn collect-routes
   "The third parameter of this function, extra-metadata-fn, is supposed to be a
   counterpart of fnhouse's extra-info-fn. It takes contents of :annotations
@@ -79,6 +72,12 @@
           reducer (partial collect-route ns-sym->prefix extra-metadata-fn)
           api-routes (reduce reducer {} handlers)]
       (reduce collect-resource-meta api-routes ns-sym->prefix))))
+
+(def wrap-swagger-ui ring-swagger-ui/wrap-swagger-ui)
+
+;;
+;; Swagger 1.2 Endpoints
+;;
 
 (defnk $api-docs$GET
   "Apidocs"
