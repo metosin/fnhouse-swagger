@@ -19,7 +19,7 @@
                                                                       :version "1.0"}})]
 
     (fact "produces valid Swagger-data"
-      (swagger/validate swagger) => nil)
+      (s/check swagger/Swagger swagger) => nil)
 
     (fact "is mapped correctly"
 
