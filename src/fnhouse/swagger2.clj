@@ -1,7 +1,7 @@
 (ns ^:no-doc fnhouse.swagger2
   (:require
     [plumbing.core :refer :all]
-    [ring.swagger.spec2 :as swagger]
+    [ring.swagger.swagger2 :as swagger]
     [ring.swagger.ui :as swagger-ui]
     [clojure.set :refer [map-invert]]
     [schema.core :as s]))
@@ -11,15 +11,19 @@
 ;;
 
 (defn- convert-parameters [request]
-  (for-map [[type f] {:body :body, :query :query-params, :path :uri-args}
-            :let [model (f request)]
-            :when (and model (not (empty? model)))]
-    type model))
+  (let [parameters (for-map [[type f] {:body :body, :query :query-params, :path :uri-args}
+                             :let [model (f request)]
+                             :when (and model (not (empty? model)))]
+                     type model)]
+    (if-not (empty? parameters)
+      {:parameters parameters})))
 
 (defn- convert-responses [responses]
-  (for-map [[code model] responses
-            :let [message (or (some-> model meta :message) "")]]
-    code {:description message, :schema model}))
+  (let [responses (for-map [[code model] responses
+                            :let [message (or (some-> model meta :message) "")]]
+                    code {:description message, :schema model})]
+    (if-not (empty? responses)
+      {:responses responses})))
 
 (defn- ignore-ns? [ns-sym]
   (:no-doc (meta (the-ns ns-sym))))
@@ -28,17 +32,15 @@
   (letk [[[:info method path description request responses annotations
            [:source-map ns]]] annotated-handler]
     (let [ns-sym (symbol ns)
-          prefix (ns-sym->prefix ns-sym)
-          extra-metadata (or (extra-metadata-fn annotations) {})]
+          prefix (ns-sym->prefix ns-sym)]
       (if (ignore-ns? ns-sym)
         routes
         (assoc-in routes [path method]
-                  (merge extra-metadata
+                  (merge (extra-metadata-fn annotations)
+                         (convert-responses responses)
+                         (convert-parameters request)
                          {:tags        [prefix]
-                          :summary     description
-                          :description description
-                          :responses   (convert-responses responses)
-                          :parameters  (convert-parameters request)}))))))
+                          :summary     description}))))))
 
 ;;
 ;; Public API

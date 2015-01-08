@@ -4,7 +4,7 @@
             [fnhouse.makkara :as m]
             [plumbing.core :refer [defnk]]
             [fnhouse.handlers :as handlers]
-            [ring.swagger.spec2 :as swagger]
+            [ring.swagger.swagger2 :as swagger]
             [schema.core :as s]))
 
 ;;
@@ -27,15 +27,13 @@
 
       {:info {:title "Makkara API"
               :version "1.0"}
-       :paths {"/makkarat/" {:post {:description "Adds a Makkara"
-                                    :parameters {:body m/NewMakkara
+       :paths {"/makkarat/" {:post {:parameters {:body m/NewMakkara
                                                  :query {s/Keyword s/Str}}
                                     :responses {200 {:description ""
                                                      :schema m/Makkara}}
                                     :summary "Adds a Makkara"
                                     :tags ["makkarat"]}}
-               "/makkarat/:makkara-id" {:get {:description "Gets a Makkara"
-                                              :parameters {:path {:makkara-id Long}
+               "/makkarat/:makkara-id" {:get {:parameters {:path {:makkara-id Long}
                                                            :query {s/Keyword s/Str}}
                                               :responses {200 {:description ""
                                                                :schema m/Makkara}}
