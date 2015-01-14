@@ -66,7 +66,11 @@
           routes (reduce route-collector {} handlers)]
       (assoc extra-parameters :paths routes))))
 
-(def wrap-swagger-ui swagger-ui/wrap-swagger-ui)
+(defn wrap-swagger-ui
+  "Middleware to serve the swagger-ui."
+  [handler & params]
+  (apply swagger-ui/wrap-swagger-ui
+         (into [handler :swagger-docs "swagger.json"] params)))
 
 ;;
 ;; Swagger 2.0 Endpoint
