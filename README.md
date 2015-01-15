@@ -5,7 +5,7 @@
 
 [Swagger](https://helloreverb.com/developers/swagger) implementation
 for [fnhouse](https://github.com/Prismatic/fnhouse) using the
-[Ring-swagger](https://github.com/metosin/ring-swagger).
+[Ring-swagger](https://github.com/metosin/ring-swagger). Supports both 1.2 and 2.0 versions of the spec.
 
 This is an alpha release, like fnhouse itself.
 
