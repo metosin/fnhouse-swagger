@@ -3,6 +3,7 @@
     [plumbing.core :refer :all]
     [ring.swagger.swagger2 :as swagger]
     [ring.swagger.ui :as swagger-ui]
+    [ring.swagger.middleware :refer [comp-mw]]
     [clojure.set :refer [map-invert]]
     [schema.core :as s]))
 
@@ -66,11 +67,8 @@
           routes (reduce route-collector {} handlers)]
       (assoc extra-parameters :paths routes))))
 
-(defn wrap-swagger-ui
-  "Middleware to serve the swagger-ui."
-  [handler & params]
-  (apply swagger-ui/wrap-swagger-ui
-         (into [handler :swagger-docs "swagger.json"] params)))
+(def wrap-swagger-ui
+  (comp-mw swagger-ui/wrap-swagger-ui :swagger-docs "swagger.json"))
 
 ;;
 ;; Swagger 2.0 Endpoint
