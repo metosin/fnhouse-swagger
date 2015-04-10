@@ -4,9 +4,9 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [prismatic/plumbing "0.3.5"]
+                 [prismatic/plumbing "0.4.2"]
                  [prismatic/fnhouse "0.1.1"]
-                 [metosin/ring-swagger "0.17.0"]
+                 [metosin/ring-swagger "0.19.4"]
                  [ring/ring-core "1.3.2"]]
   :profiles {:dev {:plugins [[lein-clojars "0.9.1"]
                              [lein-midje "3.1.3"]]
