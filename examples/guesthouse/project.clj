@@ -6,7 +6,7 @@
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [metosin/fnhouse-swagger "0.5.1"]
                  [metosin/ring-swagger-ui "2.1.0-alpha.6-SNAPSHOT"]
-                 [clj-http "1.0.1"]
+                 [clj-http "1.1.0"]
                  [ring/ring-core "1.3.2"]
                  [ring/ring-jetty-adapter "1.3.2"]
                  [ring/ring-json "0.3.1"]])
