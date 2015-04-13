@@ -1,4 +1,4 @@
-(defproject metosin/fnhouse-swagger "0.5.0"
+(defproject metosin/fnhouse-swagger "0.5.1"
   :description "Swagger-support for fnhouse"
   :url "https://github.com/metosin/fnhouse-swagger"
   :license {:name "Eclipse Public License"
